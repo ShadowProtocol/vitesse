@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useUserStore } from '~/stores/user'
+import { useUserStore } from '~/store/user'
 
 const user = useUserStore()
 const name = ref(user.savedName)
 
 const router = useRouter()
-const go = () => {
+const goToNameRoute = () => {
   if (name.value)
     router.push(`/hi/${encodeURIComponent(name.value)}`)
 }
@@ -42,7 +42,7 @@ const { t } = useI18n()
       bg="transparent"
       border="~ rounded gray-200 dark:gray-700"
       outline="none active:none"
-      @keydown.enter="go"
+      @keydown.enter="goToNameRoute"
     >
     <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
 
@@ -50,7 +50,7 @@ const { t } = useI18n()
       <button
         class="m-3 text-sm btn"
         :disabled="!name"
-        @click="go"
+        @click="goToNameRoute"
       >
         {{ t('button.go') }}
       </button>
